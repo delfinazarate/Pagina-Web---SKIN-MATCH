@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skin-Match — Perfil</title>
+<style>
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:#fbf3f3;
+    color:#553243;
+  }
+
+  /* ===== Header con iconos ===== */
+  header{background:#fff;border-bottom:1px solid #efd9e1;padding:12px 16px;}
+  .header-bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .header-left,.header-right{display:flex;align-items:center;gap:10px;}
+  .brand{margin:0;font-weight:800;letter-spacing:.5px;color:#9b5670;font-size:28px;text-align:center;}
+  .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid #efd9e1;background:#fff;color:#9b5670;position:relative;text-decoration:none;font-size:18px;}
+  .icon-btn:hover{background:#f8e9ef;}
+  .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:#9b5670;color:#fff;font-size:12px;line-height:18px;text-align:center;}
+
+  a{
+    text-decoration: none;
+    color:inherit;
+  }
+
+  /* NAV centrado */
+  .nav{
+    display:flex; gap:8px;
+    flex-wrap:wrap;
+    padding:10px 20px;
+    border-bottom:1px solid #efd9e1;
+    background:#fff;
+    justify-content:center;
+  }
+  .nav a{
+    padding:8px 12px;
+    border:1px solid #efd9e1;
+    border-radius:999px;
+    background:#fff;
+    font-weight:600;
+  }
+  .nav a:hover{ background:#f8e9ef; }
+
+  /* ===== Perfil ===== */
+  .wrap{
+    max-width:800px; margin:30px auto; padding:0 16px;
+  }
+  .profile-card{
+    background:#fff;
+    border:1px solid #efd9e1;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 6px 14px rgba(0,0,0,.06);
+    text-align:center;
+  }
+  .profile-card img{
+    width:120px; height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #efd9e1;
+    margin-bottom:12px;
+  }
+  .profile-card h2{ margin:8px 0 4px; color:#9b5670; }
+  .profile-card p{ margin:4px 0; color:#7b6671; }
+
+  /* Pedidos o favoritos */
+  .section{ margin-top:28px; }
+  .section h3{ color:#9b5670; margin-bottom:12px; }
+  .orders{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center;
+  }
+  .order{
+    background:#fff;
+    border:1px solid #efd9e1;
+    border-radius:12px;
+    width:160px;
+    padding:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+    text-align:center;
+  }
+  .order img{
+    width:100%; height:100px;
+    object-fit:cover;
+    border-radius:8px;
+    background:#f4dfe7;
+    margin-bottom:6px;
+  }
+  .order strong{ display:block; color:#9b5670; }
+  .order small{ color:#7b6671; }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-bar">
+        <div class="header-left">
+        <a href="preview.html" class="icon-btn" title="Inicio">🏠</a>
+        </div>
+        <h1 class="brand">SKIN-MATCH</h1>
+        <div class="header-right">
+        <a href="cart.html" class="icon-btn" title="Carrito">🛒 <span class="badge" id="cartCount">0</span></a>
+        <a href="profile.html" class="icon-btn" title="Mi perfil">👤</a>
+        </div>
+    </div>
+    </header>
+
+  <nav class="nav">
+    <a href="preview.html">Inicio</a>
+    <a href="matches.html">Matches</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="tutorial.html">Tutorial</a>
+    <a href="stores.html">Stores</a>
+  </nav>
+
+  <main class="wrap">
+    <!-- Tarjeta de perfil -->
+    <div class="profile-card">
+      <img src="avatar.jpg" alt="Usuario">
+      <h2>María López</h2>
+      <p>maria.lopez@example.com</p>
+      <p>📍 Buenos Aires, Argentina</p>
+    </div>
+
+    <!-- Sección de favoritos/pedidos -->
+    <div class="section">
+      <h3>⭐ Favoritos recientes</h3>
+      <div class="orders">
+        <div class="order">
+          <img src="tono.jpg" alt="Base Natural">
+          <strong>Base Natural</strong>
+          <small>Rare Beauty</small>
+        </div>
+        <div class="order">
+          <img src="rhode.jpg" alt="Labial Nude">
+          <strong>Labial Nude</strong>
+          <small>Fenty Beauty</small>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // contador de carrito
+    function getCart(){ return JSON.parse(localStorage.getItem("cart") || "[]"); }
+    function updateCartCount(){ document.getElementById("cartCount").textContent = getCart().length; }
+    updateCartCount();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skin-Match — Reviews</title>
+<style>
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #fbf3f3;
+    color: #333;
+  }
+
+  /* ===== Header con iconos ===== */
+header{
+  background:#fff;
+  border-bottom:1px solid #efd9e1;
+  padding:12px 16px;
+}
+.header-bar{
+  max-width:1060px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.header-left, .header-right{ display:flex; align-items:center; gap:10px; }
+.brand{
+  margin:0; font-weight:800; letter-spacing:.5px;
+  color:#9b5670; font-size:28px; text-align:center;
+}
+
+/* Botones de icono (carrito / perfil) */
+.icon-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:38px; height:38px; border-radius:10px;
+  border:1px solid #efd9e1; background:#fff; color:#9b5670;
+  text-decoration:none; font-size:18px; position:relative;
+}
+.icon-btn:hover{ background:#f8e9ef; }
+
+/* Badge del carrito */
+.badge{
+  position:absolute; top:-6px; right:-6px;
+  min-width:18px; height:18px; padding:0 4px;
+  border-radius:999px; background:#9b5670; color:#fff;
+  font-size:12px; line-height:18px; text-align:center;
+}
+
+  .nav{
+    display:flex; gap:8px; justify-content:center;
+    padding:10px 20px; border-bottom:1px solid #efd9e1; background:#fff;
+  }
+  .nav a{
+    padding:8px 12px;
+    border:1px solid #efd9e1;
+    border-radius:999px;
+    background:#fff;
+    font-weight:600;
+    text-decoration:none;
+    color:inherit;
+  }
+  .nav a:hover{ background:#f8e9ef; }
+
+  main{ max-width:600px; margin:20px auto; padding:0 16px; }
+
+  h2{ color:#9b5670; margin-bottom:16px; }
+
+  .review{
+    background:#fff;
+    border:1px solid #efd9e1;
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:16px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+  }
+  .review-head{
+    display:flex; align-items:center; gap:12px; margin-bottom:8px;
+  }
+  .avatar{
+    width:48px; height:48px; border-radius:50%;
+    background:#f0dce4; object-fit:cover;
+  }
+  .stars{ color:gold; font-size:18px; margin:4px 0; }
+  .product{ width:40px; height:40px; object-fit:cover; }
+
+  /* Formulario */
+  form{
+    background:#fff;
+    border:1px solid #efd9e1;
+    border-radius:14px;
+    padding:16px;
+    margin-top:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+  }
+  input, select, textarea, button {
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-family:inherit;
+    box-sizing:border-box;
+  }
+  button {
+    background:#9b5670;
+    color:#fff;
+    border:none;
+    font-weight:700;
+    cursor:pointer;
+    padding:12px;
+  }
+  button:hover {
+    background:#7a455d;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="header-bar">
+      <div class="header-left">
+        <a href="preview.html" class="icon-btn" title="Inicio">🏠</a>
+      </div>
+      <h1 class="brand">SKIN-MATCH</h1>
+      <div class="header-right">
+        <a href="cart.html" class="icon-btn" title="Carrito">
+          🛒 <span class="badge" id="cartCount">0</span>
+        </a>
+        <a href="profile.html" class="icon-btn" title="Mi perfil">👤</a>
+      </div>
+    </div>
+  </header>
+  
+<nav class="nav">
+  <a href="preview.html">Inicio</a>
+  <a href="matches.html">Matches</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="tutorial.html">Tutorial</a>
+  <a href="stores.html">Stores</a>
+</nav>
+
+<main>
+  <h2>Reviews</h2>
+
+  <!-- Ejemplo -->
+  <div class="review">
+    <div class="review-head">
+      <img src="lana.jpeg" alt="Lana" class="avatar">
+      <div>
+        <strong>Lana C.</strong><br>
+        <small>Skin Tone: Light · Skin Type: Dry</small><br>
+        <small><b>Producto:</b> Foundation X</small>
+      </div>
+      <img src="baselana.jpg" alt="producto" class="product">
+    </div>
+    <div class="stars">★★★★★</div> 
+    <p>I've tried many foundations, and this one is the best for my dry skin! It provides great coverage without emphasizing dry patches.</p>
+  </div>
+
+  <!-- Formulario -->
+  <form onsubmit="addReview(event)">
+    <h3>Dejá tu review</h3>
+    <input type="text" id="name" placeholder="Tu nombre" required>
+    <input type="text" id="tone" placeholder="Skin Tone (ej: Light, Medium)" required>
+    <select id="type" required>
+      <option value="">Tipo de piel</option>
+      <option>Dry</option>
+      <option>Normal</option>
+      <option>Combination</option>
+      <option>Oily</option>
+    </select>
+    <input type="text" id="product" placeholder="Producto que recomendás o no..." required>
+    <select id="rating" required>
+      <option value="">Rating</option>
+      <option value="5">★★★★★</option>
+      <option value="4">★★★★☆</option>
+      <option value="3">★★★☆☆</option>
+      <option value="2">★★☆☆☆</option>
+      <option value="1">★☆☆☆☆</option>
+    </select>
+    <textarea id="text" placeholder="Escribí tu opinión..." required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+</main>
+
+<script>
+  // ---------- Carrito ----------
+  const cartBadge = document.getElementById("cartCount");
+  function getCart(){ return JSON.parse(localStorage.getItem("cart")||"[]"); }
+  function saveCart(cart){ localStorage.setItem("cart", JSON.stringify(cart)); updateCartCount(); }
+  function updateCartCount(){ cartBadge.textContent = getCart().length; }
+  updateCartCount();
+
+  // ---------- Reviews ----------
+  function addReview(e){
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const tone = document.getElementById("tone").value;
+    const type = document.getElementById("type").value;
+    const product = document.getElementById("product").value;
+    const rating = document.getElementById("rating").value;
+    const text = document.getElementById("text").value;
+
+    const stars = "★".repeat(rating) + "☆".repeat(5-rating);
+
+    const newReview = document.createElement("div");
+    newReview.className = "review";
+    newReview.innerHTML = `
+      <div class="review-head">
+        <div style="width:48px; height:48px; border-radius:50%; background:#f0dce4;"></div>
+        <div>
+          <strong>${name}</strong><br>
+          <small>Skin Tone: ${tone} · Skin Type: ${type}</small><br>
+          <small><b>Producto:</b> ${product}</small>
+        </div>
+      </div>
+      <div class="stars">${stars}</div>
+      <p>${text}</p>
+    `;
+
+    // insertamos arriba del form
+    const form = document.forms[0];
+    form.parentNode.insertBefore(newReview, form);
+    form.reset();
+  }
+</script>
+
+</body>
+</html>

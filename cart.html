@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skin-Match — Carrito</title>
+<style>
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fbf3f3;color:#553243;}
+  header{background:#fff;border-bottom:1px solid #efd9e1;padding:12px 16px;}
+  .header-bar{max-width:1060px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .header-left,.header-right{display:flex;align-items:center;gap:10px;}
+  .brand{margin:0;font-weight:800;letter-spacing:.5px;color:#9b5670;font-size:28px;text-align:center;}
+  .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid #efd9e1;background:#fff;color:#9b5670;position:relative;text-decoration:none;font-size:18px;}
+  .icon-btn:hover{background:#f8e9ef;}
+  .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:#9b5670;color:#fff;font-size:12px;line-height:18px;text-align:center;}
+  .nav{display:flex;gap:8px;flex-wrap:wrap;padding:10px 20px;border-bottom:1px solid #efd9e1;background:#fff;justify-content:center;}
+  .nav a{padding:8px 12px;border:1px solid #efd9e1;border-radius:999px;background:#fff;font-weight:600;text-decoration:none;color:inherit;}
+  .nav a:hover{background:#f8e9ef;}
+
+  main{max-width:800px;margin:20px auto;padding:0 16px;}
+  h2{color:#9b5670;}
+  .cart-item{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #efd9e1;border-radius:12px;padding:10px;margin-bottom:10px;}
+  .cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px;border:1px solid #efd9e1;}
+  .info{flex:1;margin-left:10px;}
+  .info strong{display:block;color:#9b5670;}
+  .price{font-weight:700;}
+  .remove-btn{background:#fff;border:1px solid #efd9e1;border-radius:8px;padding:6px 10px;cursor:pointer;}
+  .remove-btn:hover{background:#f8e9ef;}
+  .total{margin-top:20px;font-size:18px;font-weight:700;text-align:right;}
+  .checkout{display:block;width:100%;padding:14px;border-radius:10px;background:#9b5670;color:#fff;font-size:18px;font-weight:700;border:0;cursor:pointer;margin-top:20px;}
+  .checkout:hover{filter:brightness(1.1);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bar">
+    <div class="header-left">
+      <a href="preview.html" class="icon-btn" title="Inicio">🏠</a>
+    </div>
+    <h1 class="brand">SKIN-MATCH</h1>
+    <div class="header-right">
+      <a href="cart.html" class="icon-btn" title="Carrito">🛒 <span class="badge" id="cartCount">0</span></a>
+      <a href="profile.html" class="icon-btn" title="Mi perfil">👤</a>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="preview.html">Inicio</a>
+  <a href="matches.html">Matches</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="tutorial.html">Tutorial</a>
+  <a href="stores.html">Stores</a>
+</nav>
+
+<main>
+  <h2>🛍️ Tu carrito</h2>
+  <div id="cartItems"></div>
+  <div id="cartTotal" class="total"></div>
+  <button class="checkout" onclick="checkout()">Finalizar compra</button>
+</main>
+
+<script>
+  function getCart(){ return JSON.parse(localStorage.getItem("cart")) || []; }
+  function saveCart(c){ localStorage.setItem("cart", JSON.stringify(c)); updateCartCount(); }
+
+  function updateCartCount(){
+    document.getElementById("cartCount").textContent = getCart().length;
+  }
+
+  function renderCart(){
+    const cart = getCart();
+    const cartItems = document.getElementById("cartItems");
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item,i)=>{
+      total += item.precio;
+      cartItems.innerHTML += `
+        <div class="cart-item">
+          <img src="${item.img}" alt="${item.nombre}">
+          <div class="info">
+            <strong>${item.nombre}</strong>
+            <div class="price">$${item.precio}</div>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${i})">❌</button>
+        </div>
+      `;
+    });
+
+    document.getElementById("cartTotal").textContent = "Total: $" + total.toFixed(2);
+  }
+
+  function removeItem(i){
+    const cart = getCart();
+    cart.splice(i,1);
+    saveCart(cart);
+    renderCart();
+  }
+
+  function checkout(){
+    alert("✅ Compra realizada con éxito");
+    saveCart([]);
+    renderCart();
+  }
+
+  updateCartCount();
+  renderCart();
+</script>
+
+</body>
+</html>
